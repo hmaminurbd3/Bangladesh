@@ -1,131 +1,65 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<H1>  Md.Aminur Rahman <br> Bangladesh</H1> 
-<meta charset="UTF-8">
-<title>Live Progress</title>
-
 <style>
+* {
+  box-sizing: border-box;
+}
+
 body {
   margin: 0;
+  background: #000;
   font-family: Arial, sans-serif;
-  background: #f4f4f4;
-  text-align: center;
 }
 
-/* container */
-.container {
-  margin-top: 100px;
+/* Gallery Grid */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* ALWAYS 2 */
+  gap: 6px;
+  padding: 6px;
 }
 
-/* circle */
-.circle {
-  width: 180px;
-  height: 180px;
-  margin: auto;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+/* Card */
+.card {
   position: relative;
-}
-
-.circle::before {
-  content: "";
-  position: absolute;
-  width: 130px;
-  height: 130px;
-  background: white;
-  border-radius: 50%;
-}
-
-/* text */
-.value {
-  position: relative;
-  font-size: 30px;
-  font-weight: bold;
-}
-
-/* bar */
-.bar-bg {
-  width: 80%;
-  max-width: 400px;
-  height: 20px;
-  background: #ddd;
-  border-radius: 20px;
-  margin: 40px auto 0;
+  width: 100%;
+  aspect-ratio: 1 / 1.4; /* freefunz-like */
+  background-size: cover;
+  background-position: center;
+  border-radius: 6px;
   overflow: hidden;
 }
 
-.bar-fill {
-  height: 100%;
-  width: 0%;
-  background: linear-gradient(90deg, #4caf50, #00c853);
-  transition: width 0.5s ease;
+/* Click overlay */
+.card a {
+  position: absolute;
+  inset: 0;
 }
 
-/* title */
-h2 {
-  margin-bottom: 30px;
+/* Title overlay (optional) */
+.card span {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  color: #fff;
+  font-size: 13px;
+  padding: 6px;
+  text-align: center;
 }
 </style>
-</head>
-
-<body>
-
-<div class="container">
-
-  <h2>Live Progress</h2>
-
-  <!-- circle -->
-  <div class="circle" id="circle">
-    <div class="value" id="value">0%</div>
-  </div>
-
-  <!-- bar -->
-  <div class="bar-bg">
-    <div class="bar-fill" id="bar"></div>
-  </div>
-
-</div>
+<div class="gallery" id="gallery"></div>
 
 <script>
-const API_URL = "https://sheetdb.io/api/v1/3ng8jcnpkt0pz";
-
-function updateUI(percent) {
-  percent = Math.max(1, Math.min(100, percent));
-
-  let degree = (percent / 100) * 360;
-
-  // circle update
-  document.getElementById("circle").style.background =
-    `conic-gradient(#4caf50 ${degree}deg, #e0e0e0 ${degree}deg)`;
-
-  // bar update
-  document.getElementById("bar").style.width = percent + "%";
-
-  // text
-  document.getElementById("value").innerText = percent + "%";
-}
-
-function fetchData() {
-  fetch(API_URL)
-    .then(res => res.json())
-    .then(data => {
-      let progress = parseInt(data[0].progress);
-      if (!isNaN(progress)) {
-        updateUI(progress);
-      }
-    })
-    .catch(err => console.log("Error:", err));
-}
-
-// first load
-fetchData();
-
-// auto refresh every 5 sec
-setInterval(fetchData, 5000);
+fetch("https://sheetdb.io/api/v1/6suyus63y1agu")
+  .then(res => res.json())
+  .then(data => {
+    const gallery = document.getElementById("gallery");
+    data.forEach(item => {
+      gallery.innerHTML += `
+        <div class="card" style="background-image:url('${item.image}')">
+          <a href="page.html?id=${item.id}"></a>
+          <span>${item.title}</span>
+        </div>
+      `;
+    });
+  });
 </script>
-
-</body>
-</html>
