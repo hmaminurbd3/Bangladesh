@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Live Progress</title>
+
+<style>
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f4f4;
+  text-align: center;
+}
+
+/* container */
+.container {
+  margin-top: 100px;
+}
+
+/* circle */
+.circle {
+  width: 180px;
+  height: 180px;
+  margin: auto;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.circle::before {
+  content: "";
+  position: absolute;
+  width: 130px;
+  height: 130px;
+  background: white;
+  border-radius: 50%;
+}
+
+/* text */
+.value {
+  position: relative;
+  font-size: 30px;
+  font-weight: bold;
+}
+
+/* bar */
+.bar-bg {
+  width: 80%;
+  max-width: 400px;
+  height: 20px;
+  background: #ddd;
+  border-radius: 20px;
+  margin: 40px auto 0;
+  overflow: hidden;
+}
+
+.bar-fill {
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #4caf50, #00c853);
+  transition: width 0.5s ease;
+}
+
+/* title */
+h2 {
+  margin-bottom: 30px;
+}
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <h2>Live Progress</h2>
+
+  <!-- circle -->
+  <div class="circle" id="circle">
+    <div class="value" id="value">0%</div>
+  </div>
+
+  <!-- bar -->
+  <div class="bar-bg">
+    <div class="bar-fill" id="bar"></div>
+  </div>
+
+</div>
+
+<script>
+const API_URL = "https://sheetdb.io/api/v1/3ng8jcnpkt0pz";
+
+function updateUI(percent) {
+  percent = Math.max(1, Math.min(100, percent));
+
+  let degree = (percent / 100) * 360;
+
+  // circle update
+  document.getElementById("circle").style.background =
+    `conic-gradient(#4caf50 ${degree}deg, #e0e0e0 ${degree}deg)`;
+
+  // bar update
+  document.getElementById("bar").style.width = percent + "%";
+
+  // text
+  document.getElementById("value").innerText = percent + "%";
+}
+
+function fetchData() {
+  fetch(API_URL)
+    .then(res => res.json())
+    .then(data => {
+      let progress = parseInt(data[0].progress);
+      if (!isNaN(progress)) {
+        updateUI(progress);
+      }
+    })
+    .catch(err => console.log("Error:", err));
+}
+
+// first load
+fetchData();
+
+// auto refresh every 5 sec
+setInterval(fetchData, 5000);
+</script>
+
+</body>
+</html>
