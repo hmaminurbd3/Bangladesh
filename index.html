@@ -69,10 +69,39 @@ body {
   font-weight: bold;
   color: #ffe600;
 }
+   /* Text overlay এনিমেশন টেকস্ট (Eidt) */
+  .scroll-text {
+  width: 100%;
+  overflow: hidden;
+  background: #000;
+  padding: 8px 0;
+}
+
+.scroll-text p {
+  display: inline-block;
+  white-space: nowrap;
+  color: #00ffcc;
+  font-size: 16px;
+  font-weight: bold;
+  animation: scrollLeft 10s linear infinite;
+}
+
+/* Animation */
+@keyframes scrollLeft {
+  0% {
+    transform: translateX(100%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
 </style>
 <div class="header">
   <h1>সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন</h1>
   <p>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার কর্তৃক অনুমোদিত, রেজি নং ১৯৭০৮</p>
+</div>
+<div class="scroll-text">
+  <p>আমার একাউন্ট সাথে সাথে যখনি মাঝখানের</p>
 </div>
 <div class="gallery" id="gallery"></div>
 
