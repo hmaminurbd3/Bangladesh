@@ -14,39 +14,42 @@ body{
   color:#fff;
 }
 
+/* Full Profile Box */
+.profile-box{
+  width:92%;
+  margin:14px auto;
+  border:3px solid #555;
+  border-radius:14px;
+  overflow:hidden;
+  background:#111;
+}
+
 /* Main Image */
 .main-image-wrapper{
   width:100%;
-  padding-top:15px;
-  display:flex;
-  justify-content:center;
 }
 
 .main-image{
-  width:92%;
+  width:100%;
+  display:block;
   object-fit:contain;
-  border-radius:12px 12px 0px 0px;
+  border-radius:10px 10px 0px 0px;
 }
 
 /* Info Card */
 .info-card{
-  width:92%;
-  box-sizing:border-box;
-  background:#111;
-  margin:0 auto 14px;
   padding:18px;
-  border:1px solid #333;
   text-align:center;
 }
 
 /* Name */
 .info-card h2{
   margin:5px 0 18px;
-  font-size:20px;
+  font-size:26px;
   color:#fff;
 }
 
-/* Line by line text */
+/* Text */
 .info-card p{
   margin:10px 0;
   font-size:17px;
@@ -76,42 +79,46 @@ body{
 
 <body>
 
-<!-- Main Image -->
-<div class="main-image-wrapper">
-  <img id="mainImage" class="main-image" src="" alt="">
-</div>
+<div class="profile-box">
 
-<!-- ID Card -->
-<div class="info-card">
+  <!-- Main Image -->
+  <div class="main-image-wrapper">
+    <img id="mainImage" class="main-image" src="" alt="">
+  </div>
 
-  <h2 id="name">Loading...</h2>
+  <!-- Info -->
+  <div class="info-card">
 
-  <p>
-    <strong>পদবি:</strong>
-    <span id="rank"></span>
-  </p>
+    <h2 id="name">Loading...</h2>
 
-  <p>
-    <strong>ঠিকানা:</strong>
-    <span id="address"></span>
-  </p>
+    <p>
+      <strong>পদবি:</strong>
+      <span id="rank"></span>
+    </p>
 
-  <p>
-    <strong>কর্মরত:</strong>
-    <span id="working"></span>
-  </p>
+    <p>
+      <strong>ঠিকানা:</strong>
+      <span id="address"></span>
+    </p>
 
-  <p>
-    <strong>মোবাইল নাম্বার:</strong>
-    <span id="phone"></span>
-  </p>
+    <p>
+      <strong>কর্মরত:</strong>
+      <span id="working"></span>
+    </p>
 
-  <div class="stats">
-    বই:
-    <span id="book"></span>
+    <p>
+      <strong>মোবাইল নাম্বার:</strong>
+      <span id="phone"></span>
+    </p>
 
-    কোরআন:
-    <span id="quran"></span>
+    <div class="stats">
+      বই:
+      <span id="book"></span>
+
+      কোরআন:
+      <span id="quran"></span>
+    </div>
+
   </div>
 
 </div>
