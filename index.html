@@ -1,124 +1,277 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gallery</title>
+
 <style>
-* {
-  box-sizing: border-box;
+
+*{
+  box-sizing:border-box;
 }
 
-body {
-  margin: 0;
-  background: #000;
-  font-family: Arial, sans-serif;
+body{
+  margin:0;
+  background:#000;
+  font-family:Arial,sans-serif;
 }
 
-/* Gallery Grid */
-.gallery {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* ALWAYS 2 */
-  gap: 6px;
-  padding: 6px;
+/* Header */
+.header{
+  text-align:center;
+  padding:12px 8px;
+  background:#003366;
+  color:#fff;
 }
 
-/* Card */
-.card {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 1 / 1.4; /* freefunz-like */
-  background-size: cover;
-  background-position: center;
-  border-radius: 6px;
-  overflow: hidden;
+.header h1{
+  font-size:40px;
+  margin:0 0 6px;
+  font-weight:bold;
 }
 
-/* Click overlay */
-.card a {
-  position: absolute;
-  inset: 0;
+.header p{
+  margin:2px 0;
+  font-size:30px;
 }
 
-/* Title overlay (optional) */
-.card span {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  background: linear-gradient(to top, rgba(0,0,0,.8), transparent);
-  color: #fff;
-  font-size: 13px;
-  padding: 6px;
-  text-align: center;
-}
-/* Text overlay (Eidt) নাম এবং ঠিকানা */
-.header {
-  text-align: center;
-  padding: 12px 8px;
-  background: #003366;
-  color: #FFFFFF;
+/* Scrolling Text */
+.scroll-text{
+  width:100%;
+  overflow:hidden;
+  background:#000;
+  padding:4px 0;
 }
 
-.header h1 {
-  font-size: 40px;
-  margin: 0 0 6px;
-  font-weight: bold;
-}
-
-.header p {
-  margin: 2px 0;
-  font-size: 30px;
-}
-
-.header .phone {
-  margin-top: 6px;
-  font-weight: bold;
-  color: #ffe600;
-}
-   /* Text overlay এনিমেশন টেকস্ট (Eidt) */
-  .scroll-text {
-  width: 100%;
-  overflow: hidden;
-  background: #000;
-  padding: 4px 0; /* আগের থেকে কমানো */
-}
-
-.scroll-text p {
-  display: inline-block;
-  white-space: nowrap;
-  color: #00ffcc;
-  font-size: 22px; /* 🔥 বড় করা */
-  font-weight: bold;
-  margin: 0; /* 🔥 extra gap remove */
-  line-height: 1.2; /* 🔥 gap control */
-  animation: scrollLeft 30s linear infinite;
+.scroll-text p{
+  display:inline-block;
+  white-space:nowrap;
+  color:#00ffcc;
+  font-size:22px;
+  font-weight:bold;
+  margin:0;
+  line-height:1.2;
+  padding-left:100%;
+  animation:scrollLeft 30s linear infinite;
 }
 
 /* Animation */
-@keyframes scrollLeft {
-  0% {
-    transform: translateX(100%);
+@keyframes scrollLeft{
+
+  0%{
+    transform:translateX(0%);
   }
-  100% {
-    transform: translateX(-100%);
+
+  100%{
+    transform:translateX(-200%);
   }
+
+}
+
+/* Gallery */
+.gallery{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:6px;
+  padding:6px;
+}
+
+/* Card */
+.card{
+  position:relative;
+  width:100%;
+  aspect-ratio:1 / 1.4;
+  border-radius:6px;
+  overflow:hidden;
+  background:#111;
+}
+
+/* Image */
+.card-img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* Click Area */
+.card a{
+  position:absolute;
+  inset:0;
+}
+
+/* Title */
+.card span{
+  position:absolute;
+  bottom:0;
+  width:100%;
+  background:linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  color:#fff;
+  font-size:16px;
+  font-weight:bold;
+  padding:8px;
+  text-align:center;
+}
+
+/* Floating Button */
+.chat-button{
+  position:fixed;
+  right:20px;
+  bottom:20px;
+  width:55px;
+  height:55px;
+  background:#00aa88;
+  color:#fff;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  cursor:pointer;
+  z-index:9999;
+  -webkit-tap-highlight-color: transparent;
+  outline:none;
+}
+
+/* Popup */
+.popup-box{
+  position:fixed;
+  right:20px;
+  bottom:85px;
+  width:320px;
+  background:#111;
+  color:#fff;
+  padding:15px;
+  border-radius:12px;
+  border:2px solid #444;
+  display:none;
+  z-index:9999;
+}
+
+.popup-box h3{
+  margin-top:0;
+  font-size:20px;
+}
+
+.popup-box p{
+  font-size:15px;
+  line-height:1.6;
+}
 
 </style>
+</head>
+
+<body>
+
+<!-- Header -->
 <div class="header">
-  <h1>সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন</h1>
-  <p>গণপ্রজাতন্ত্রী বাংলাদেশ সরকার কর্তৃক অনুমোদিত, রেজি নং ১৯৭০৮</p>
+
+  <h1>
+    সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন
+  </h1>
+
+  <p>
+    গণপ্রজাতন্ত্রী বাংলাদেশ সরকার কর্তৃক অনুমোদিত, রেজি নং ১৯৭০৮
+  </p>
+
 </div>
+
+<!-- Scrolling Text -->
 <div class="scroll-text">
-  <p>আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ প্রিয় শিক্ষকবৃন্দ আপনাদের দোয়া এবং আল্লাহর অশেষ রহমতে কারীয়ানা জগতে আমরা সর্বপ্রথম ওয়েবসাইট যাত্রা শুরু করেছি, আশাকরি এখান থেকে আমরা অনেক উপকৃত হব, যেহেতু অ্যাপস টা নতুন তাই যেকোনো সমস্যা দেখা দিতে পারে, যদি কোন সমস্যা দেখা দেয় এবং আপনার পার্সোনাল ডিটেলস ভুল দেখায় তাহলে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: ০১৩১৫৬৩৭৮৯৩) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ। </p>
+
+  <p>
+একটি বিশেষ বিজ্ঞপ্তি: ৫-১- ২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
+  </p>
+
 </div>
+
+<!-- Gallery -->
 <div class="gallery" id="gallery"></div>
 
+<!-- Floating Button -->
+<div class="chat-button" onclick="togglePopup(event)">
+  💬
+</div>
+
+<!-- Popup -->
+<div class="popup-box" id="popupBox">
+
+  <h3>নোটিশ</h3>
+
+  <p>
+    আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ প্রিয় শিক্ষকবৃন্দ আল্লাহর অশেষ রহমত এবং আপনাদের দোআয় কারীয়ানা জগতে আমরা সর্বপ্রথম ওয়েবসাইট যাত্রা শুরু করেছি, আশাকরি এখান থেকে আমরা অনেক উপকৃত হব, যেহেতু অ্যাপস টা নতুন তাই যেকোনো সমস্যা দেখা দিতে পারে, যদি কোন সমস্যা দেখা দেয় এবং আপনার পার্সোনাল ডিটেলস ভুল দেখায় তাহলে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: ০১৩১৫৬৩৭৮৯৩) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ। 
+  </p>
+
+</div>
+
 <script>
-fetch("https://sheetdb.io/api/v1/6g14o3v06mhoa")
-  .then(res => res.json())
-  .then(data => {
-    const gallery = document.getElementById("gallery");
-    data.forEach(item => {
-      gallery.innerHTML += `
-        <div class="card" style="background-image:url('${item.image}')">
-          <a href="page.html?id=${item.id}"></a>
-          <span>${item.title}</span>
-        </div>
-      `;
-    });
+
+/* API */
+const API_URL = "https://sheetdb.io/api/v1/6g14o3v06mhoa";
+
+/* Gallery Load */
+fetch(API_URL)
+
+.then(res => res.json())
+
+.then(data => {
+
+  const gallery = document.getElementById("gallery");
+
+  data.forEach(item => {
+
+    gallery.innerHTML += `
+
+      <div class="card">
+
+        <img src="${item.image}" class="card-img">
+
+        <a href="page.html?id=${item.id}"></a>
+
+        <span>${item.title}</span>
+
+      </div>
+
+    `;
+
   });
+
+})
+
+.catch(error => {
+
+  console.log(error);
+
+});
+
+/* Popup Toggle */
+function togglePopup(event){
+
+  event.stopPropagation();
+
+  const popup = document.getElementById("popupBox");
+
+  if(popup.style.display === "block"){
+
+    popup.style.display = "none";
+
+  }else{
+
+    popup.style.display = "block";
+
+  }
+
+}
+
+/* Click Anywhere Close Popup */
+document.addEventListener("click", function(){
+
+  document.getElementById("popupBox").style.display = "none";
+
+});
+
 </script>
+
+</body>
+</html>
