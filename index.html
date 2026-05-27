@@ -5,6 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery</title>
 
+<!-- Bengali Font -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
 
 *{
@@ -13,15 +16,29 @@
 
 body{
   margin:0;
-  background:#000;
-  font-family:Arial,sans-serif;
+  background:#07111f;
+  font-family:'Noto Sans Bengali', sans-serif;
+  animation:fadeIn .5s ease;
+}
+
+/* Smooth Page Animation */
+@keyframes fadeIn{
+
+  from{
+    opacity:0;
+  }
+
+  to{
+    opacity:1;
+  }
+
 }
 
 /* Loading Screen */
 #loader{
   position:fixed;
   inset:0;
-  background:#000;
+  background:#07111f;
   color:#d6d6d6;
   display:flex;
   align-items:center;
@@ -36,7 +53,7 @@ body{
 .header{
   text-align:center;
   padding:12px 8px;
-  background:#003366;
+  background:linear-gradient(90deg,#003366,#005599);
   color:#fff;
 }
 
@@ -68,7 +85,7 @@ body{
   margin:0;
   line-height:1.2;
   padding-left:100%;
-  animation:scrollLeft 30s linear infinite;
+  animation:scrollLeft 40s linear infinite;
 }
 
 /* Animation */
@@ -93,6 +110,7 @@ body{
 }
 
 /* Card */
+
 .card{
   position:relative;
   width:100%;
@@ -100,6 +118,54 @@ body{
   border-radius:6px;
   overflow:hidden;
   background:#111;
+  border:1px solid #222;
+
+  opacity:0;
+  transition:all .8s ease;
+}
+
+/* Left */
+.card:nth-child(4n+1){
+  transform:translateX(-60px);
+}
+
+/* Right */
+.card:nth-child(4n+2){
+  transform:translateX(60px);
+}
+
+/* Top */
+.card:nth-child(4n+3){
+  transform:translateY(-60px);
+}
+
+/* Bottom */
+.card:nth-child(4n+4){
+  transform:translateY(60px);
+}
+
+/* Show Animation */
+.card.show{
+  opacity:1 !important;
+  transform:translateX(0) translateY(0) !important;
+}
+
+/* Different Direction Animation */
+
+.card:nth-child(4n+1){
+  transform:translateX(-60px);
+}
+
+.card:nth-child(4n+2){
+  transform:translateX(60px);
+}
+
+.card:nth-child(4n+3){
+  transform:translateY(-60px);
+}
+
+.card:nth-child(4n+4){
+  transform:translateY(60px);
 }
 
 /* Image */
@@ -147,6 +213,7 @@ body{
   z-index:9999;
   -webkit-tap-highlight-color: transparent;
   outline:none;
+  box-shadow:0 0 15px rgba(0,255,200,.5);
 }
 
 /* Popup */
@@ -155,7 +222,8 @@ body{
   right:20px;
   bottom:85px;
   width:320px;
-  background:#111;
+  background:rgba(17,17,17,.85);
+  backdrop-filter:blur(10px);
   color:#fff;
   padding:15px;
   border-radius:12px;
@@ -181,16 +249,14 @@ body{
 
 <!-- Loading -->
 <div id="loader">
-  <i>
-    রোকোজারা...
-  </i>
+  Loading...
 </div>
 
 <!-- Header -->
 <div class="header">
 
   <h1>
-    সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন।
+    সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন
   </h1>
 
   <p>
@@ -199,7 +265,7 @@ body{
 
 </div>
 
-<!-- Scrolling Text -->
+<!-- Notice -->
 <div class="scroll-text">
 
   <p>
@@ -211,7 +277,7 @@ body{
 <!-- Gallery -->
 <div class="gallery" id="gallery"></div>
 
-<!-- Floating Button -->
+<!-- Floating Message Button -->
 <div class="chat-button" onclick="togglePopup(event)">
   💬
 </div>
@@ -222,7 +288,10 @@ body{
   <h3>নোটিশ</h3>
 
   <p>
-    আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ।
+    <i>
+      আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ। 
+       অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: ০১৩১৫৬৩৭৮৯৩) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
+    </i>
   </p>
 
 </div>
@@ -250,6 +319,7 @@ fetch(API_URL)
         <img 
           src="${item.image}" 
           class="card-img"
+          loading="lazy"
           onload="hideLoader()"
         >
 
@@ -260,6 +330,29 @@ fetch(API_URL)
       </div>
 
     `;
+
+  });
+
+  /* Scroll Animation */
+  const cards = document.querySelectorAll(".card");
+
+  const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+      if(entry.isIntersecting){
+
+        entry.target.classList.add("show");
+
+      }
+
+    });
+
+  });
+
+  cards.forEach(card => {
+
+    observer.observe(card);
 
   });
 
