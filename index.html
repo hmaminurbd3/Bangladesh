@@ -5,132 +5,191 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Gallery</title>
 
-<!-- Bengali Font -->
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
 
 <style>
 
 *{
-  box-sizing:border-box;
   margin:0;
   padding:0;
+  box-sizing:border-box;
 }
 
 html,
 body{
   width:100%;
-  max-width:100%;
   overflow-x:hidden;
-}
-
-body{
   background:#07111f;
   font-family:'Noto Sans Bengali', sans-serif;
-  animation:fadeIn .5s ease;
 }
 
-/* Smooth Page Animation */
-@keyframes fadeIn{
+/* =========================
+   LOADER
+========================= */
 
-  from{
-    opacity:0;
-  }
-
-  to{
-    opacity:1;
-  }
-
-}
-
-/* Loading Screen */
 #loader{
   position:fixed;
   inset:0;
   background:#07111f;
-  color:#d6d6d6;
+  color:#fff;
   display:flex;
   align-items:center;
   justify-content:center;
   font-size:28px;
   font-weight:bold;
-  letter-spacing:1px;
-  z-index:99999;
+  z-index:999999;
 }
 
-/* Header */
+/* =========================
+   FIXED TOP AREA
+========================= */
+
+.fixed-top{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100px;
+  z-index:9999;
+  background:#07111f;
+}
+
+/* =========================
+   HEADER
+========================= */
+
 .header{
   width:100%;
-  text-align:center;
   padding:12px 8px;
-  background:linear-gradient(90deg,#003366,#005599);
+  text-align:center;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0066cc,
+    #0099ff,
+    #00d68f
+  );
+
   color:#fff;
 }
 
 .header h1{
   font-size:18px;
-  margin-bottom:6px;
-  font-weight:bold;
+  margin-bottom:5px;
+  font-weight:700;
 }
 
 .header p{
   font-size:12px;
+  opacity:.95;
 }
 
-/* Scrolling Text */
-.scroll-text{
+/* =========================
+   PREMIUM SLIDER
+========================= */
+
+.offer-slider{
   width:100%;
   overflow:hidden;
-  background:#000;
-  padding:2px 0;
+
+  background:
+  linear-gradient(
+    90deg,
+    #0099ff,
+    #00c6ff,
+    #00d68f,
+    #00a86b,
+    #0099ff
+  );
+
+  border-top:
+  1px solid rgba(255,255,255,.08);
+
+  border-bottom:
+  1px solid rgba(255,255,255,.08);
+
+  /* সামান্য ফাঁকা */
+  margin-bottom:6px;
 }
 
-.scroll-text p{
-  display:inline-block;
-  white-space:nowrap;
-  color:#00ffcc;
-  font-size:15px;
-  font-weight:bold;
-  line-height:1.2;
-  padding-left:100%;
-  animation:scrollLeft 40s linear infinite;
+.offer-track{
+  display:flex;
+  width:max-content;
+
+  animation:
+  sliderMove 22s linear infinite;
 }
 
-/* Animation */
-@keyframes scrollLeft{
+.offer-item{
+
+  min-width:max-content;
+
+  padding:12px 22px;
+
+  color:#fff;
+  font-size:14px;
+  font-weight:700;
+
+  border-right:
+  1px solid rgba(255,255,255,.12);
+
+}
+
+@keyframes sliderMove{
 
   0%{
-    transform:translateX(0%);
+    transform:translateX(0);
   }
 
   100%{
-    transform:translateX(-200%);
+    transform:translateX(-50%);
   }
 
 }
 
-/* Gallery */
+/* =========================
+   GALLERY
+========================= */
+
 .gallery{
   width:100%;
+
   display:grid;
   grid-template-columns:repeat(2,1fr);
+
   gap:6px;
-  padding:6px;
+
+  /* আরো উপরে উঠানো হয়েছে */
+  padding:112px 6px 6px;
 }
 
 /* Card */
+
 .card{
   position:relative;
   width:100%;
   aspect-ratio:1 / 1.4;
-  border-radius:6px;
+
   overflow:hidden;
-  background:#111;
-  border:1px solid #222;
+  border-radius:8px;
+
   opacity:0;
+
   transition:all .8s ease;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0099ff,
+    #00d68f
+  );
+
+  padding:2px;
 }
 
-/* Different Animation Directions */
+/* Animation */
+
 .card:nth-child(4n+1){
   transform:translateX(-60px);
 }
@@ -147,105 +206,157 @@ body{
   transform:translateY(60px);
 }
 
-/* Show Animation */
 .card.show{
   opacity:1 !important;
-  transform:translateX(0) translateY(0) !important;
+  transform:translate(0,0) !important;
 }
 
 /* Image */
+
 .card-img{
   width:100%;
   height:100%;
   object-fit:cover;
   display:block;
+
+  border-radius:6px;
 }
 
-/* Click Area */
+/* Click */
+
 .card a{
   position:absolute;
   inset:0;
 }
 
 /* Title */
+
 .card span{
   position:absolute;
-  bottom:0;
-  width:100%;
-  background:linear-gradient(to top, rgba(0,0,0,.8), transparent);
+  left:2px;
+  bottom:2px;
+  width:calc(100% - 4px);
+
+  padding:8px;
+
   color:#fff;
   font-size:12px;
   font-weight:bold;
-  padding:8px;
+
   text-align:center;
+
+  border-radius:0 0 6px 6px;
+
+  background:
+  linear-gradient(
+    to top,
+    rgba(0,0,0,.88),
+    transparent
+  );
 }
 
-/* Floating Button */
+/* =========================
+   FLOAT BUTTON
+========================= */
+
 .chat-button{
   position:fixed;
-  right:20px;
-  bottom:20px;
-  width:55px;
-  height:55px;
-  background:#00aa88;
-  color:#fff;
+
+  right:18px;
+  bottom:18px;
+
+  width:56px;
+  height:56px;
+
   border-radius:50%;
+
+  background:
+  linear-gradient(
+    135deg,
+    #0099ff,
+    #00d68f
+  );
+
+  color:#fff;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:28px;
+
   cursor:pointer;
-  z-index:9999;
-  -webkit-tap-highlight-color: transparent;
-  outline:none;
-  box-shadow:0 0 15px rgba(0,255,200,.5);
+
+  z-index:99999;
+
+  box-shadow:
+  0 0 20px rgba(0,255,180,.35);
 }
 
-/* Popup */
+/* =========================
+   POPUP
+========================= */
+
 .popup-box{
   position:fixed;
+
   top:50%;
   left:50%;
-  transform:translate(-50%, -50%);
+
+  transform:translate(-50%,-50%);
+
   width:90%;
   max-width:320px;
-  background:rgba(17,17,17,.92);
-  backdrop-filter:blur(10px);
+
+  background:
+  rgba(15,15,15,.94);
+
+  backdrop-filter:blur(14px);
+
   color:#fff;
+
   padding:18px;
-  border-radius:14px;
-  border:2px solid #444;
+
+  border-radius:16px;
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
   display:none;
-  z-index:99999;
-  box-shadow:0 0 25px rgba(0,0,0,.5);
-  box-sizing:border-box;
+
+  z-index:999999;
 }
 
 .popup-box h3{
+  text-align:center;
   margin-bottom:12px;
   font-size:20px;
-  text-align:center;
 }
 
 .popup-box p{
   font-size:15px;
-  line-height:1.6;
+  line-height:1.7;
 }
 
-/* Mobile Responsive */
+/* =========================
+   MOBILE
+========================= */
+
 @media(max-width:480px){
 
   .gallery{
-    gap:5px;
-    padding:5px;
+    padding:112px 6px 6px;
+  }
+
+  .offer-item{
+    padding:11px 18px;
+    font-size:13px;
   }
 
   .chat-button{
     width:52px;
     height:52px;
     font-size:26px;
-    right:15px;
-    bottom:15px;
   }
 
 }
@@ -255,37 +366,47 @@ body{
 
 <body>
 
-<!-- Loading -->
+<!-- Loader -->
 <div id="loader">
   Loading...
 </div>
 
-<!-- Header -->
-<div class="header">
+<!-- FIXED TOP -->
 
-  <h1>
-    সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন
-  </h1>
+<div class="fixed-top">
 
-  <p>
-    গণপ্রজাতন্ত্রী বাংলাদেশ সরকার কর্তৃক অনুমোদিত, রেজি নং ১৯৭০৮
-  </p>
+  <!-- Header -->
+  <div class="header">
 
-</div>
+    <h1>
+      সহিহ পদ্ধতিতে কুরআন শিক্ষা ফাউন্ডেশন
+    </h1>
 
-<!-- Notice -->
-<div class="scroll-text">
+    <p>
+      গণপ্রজাতন্ত্রী বাংলাদেশ সরকার কর্তৃক অনুমোদিত, রেজি নং ১৯৭০৮
+    </p>
 
-  <p>
-    একটি বিশেষ বিজ্ঞপ্তি: ৫-১-২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
-  </p>
+  </div>
+
+  <!-- Slider -->
+  <div class="offer-slider">
+
+    <div class="offer-track">
+
+      <div class="offer-item">
+        একটি বিশেষ বিজ্ঞপ্তি: ৫-১-২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
+         </div>
+
+    </div>
+
+  </div>
 
 </div>
 
 <!-- Gallery -->
 <div class="gallery" id="gallery"></div>
 
-<!-- Floating Message Button -->
+<!-- Floating Button -->
 <div class="chat-button" onclick="togglePopup(event)">
   💬
 </div>
@@ -293,29 +414,35 @@ body{
 <!-- Popup -->
 <div class="popup-box" id="popupBox">
 
-  <h3>নোটিশ</h3>
+  <h3><i>
+    নোটিশ
+  </i>
+    
+  </h3>
 
-  <p>
-    <i>
-      আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ। অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: 01315637893) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
+  <p><i>
+    আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ। 
+অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: 01315637893) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
     </i>
-  </p>
+    </p>
 
 </div>
 
 <script>
 
 /* API */
-const API_URL = "https://sheetdb.io/api/v1/6g14o3v06mhoa";
+const API_URL =
+"https://sheetdb.io/api/v1/6g14o3v06mhoa";
 
-/* Gallery Load */
+/* Load Gallery */
 fetch(API_URL)
 
 .then(res => res.json())
 
 .then(data => {
 
-  const gallery = document.getElementById("gallery");
+  const gallery =
+  document.getElementById("gallery");
 
   data.forEach(item => {
 
@@ -323,16 +450,19 @@ fetch(API_URL)
 
       <div class="card">
 
-        <img 
-          src="${item.image}" 
+        <img
+          src="${item.image}"
           class="card-img"
           loading="lazy"
           onload="hideLoader()"
         >
 
-        <a href="page.html?id=${item.id}"></a>
+        <a href="page.html?id=${item.id}">
+        </a>
 
-        <span>${item.title}</span>
+        <span>
+          ${item.title}
+        </span>
 
       </div>
 
@@ -341,15 +471,19 @@ fetch(API_URL)
   });
 
   /* Scroll Animation */
-  const cards = document.querySelectorAll(".card");
+  const cards =
+  document.querySelectorAll(".card");
 
-  const observer = new IntersectionObserver(entries => {
+  const observer =
+  new IntersectionObserver(entries => {
 
     entries.forEach(entry => {
 
       if(entry.isIntersecting){
 
-        entry.target.classList.add("show");
+        entry.target
+        .classList
+        .add("show");
 
       }
 
@@ -376,7 +510,9 @@ fetch(API_URL)
 /* Hide Loader */
 function hideLoader(){
 
-  document.getElementById("loader").style.display = "none";
+  document
+  .getElementById("loader")
+  .style.display = "none";
 
 }
 
@@ -385,7 +521,8 @@ function togglePopup(event){
 
   event.stopPropagation();
 
-  const popup = document.getElementById("popupBox");
+  const popup =
+  document.getElementById("popupBox");
 
   if(popup.style.display === "block"){
 
@@ -399,18 +536,23 @@ function togglePopup(event){
 
 }
 
-/* Click Outside Close Popup */
+/* Close Popup */
 document.addEventListener("click", function(e){
 
-  const popup = document.getElementById("popupBox");
-  const button = document.querySelector(".chat-button");
+  const popup =
+  document.getElementById("popupBox");
+
+  const button =
+  document.querySelector(".chat-button");
 
   if(
     popup.style.display === "block" &&
     !popup.contains(e.target) &&
     !button.contains(e.target)
   ){
+
     popup.style.display = "none";
+
   }
 
 });
