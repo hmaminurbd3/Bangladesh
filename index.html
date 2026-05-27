@@ -12,10 +12,18 @@
 
 *{
   box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,
+body{
+  width:100%;
+  max-width:100%;
+  overflow-x:hidden;
 }
 
 body{
-  margin:0;
   background:#07111f;
   font-family:'Noto Sans Bengali', sans-serif;
   animation:fadeIn .5s ease;
@@ -51,6 +59,7 @@ body{
 
 /* Header */
 .header{
+  width:100%;
   text-align:center;
   padding:12px 8px;
   background:linear-gradient(90deg,#003366,#005599);
@@ -59,12 +68,11 @@ body{
 
 .header h1{
   font-size:18px;
-  margin:0 0 6px;
+  margin-bottom:6px;
   font-weight:bold;
 }
 
 .header p{
-  margin:2px 0;
   font-size:12px;
 }
 
@@ -82,7 +90,6 @@ body{
   color:#00ffcc;
   font-size:15px;
   font-weight:bold;
-  margin:0;
   line-height:1.2;
   padding-left:100%;
   animation:scrollLeft 40s linear infinite;
@@ -103,6 +110,7 @@ body{
 
 /* Gallery */
 .gallery{
+  width:100%;
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:6px;
@@ -110,7 +118,6 @@ body{
 }
 
 /* Card */
-
 .card{
   position:relative;
   width:100%;
@@ -119,27 +126,23 @@ body{
   overflow:hidden;
   background:#111;
   border:1px solid #222;
-
   opacity:0;
   transition:all .8s ease;
 }
 
-/* Left */
+/* Different Animation Directions */
 .card:nth-child(4n+1){
   transform:translateX(-60px);
 }
 
-/* Right */
 .card:nth-child(4n+2){
   transform:translateX(60px);
 }
 
-/* Top */
 .card:nth-child(4n+3){
   transform:translateY(-60px);
 }
 
-/* Bottom */
 .card:nth-child(4n+4){
   transform:translateY(60px);
 }
@@ -148,24 +151,6 @@ body{
 .card.show{
   opacity:1 !important;
   transform:translateX(0) translateY(0) !important;
-}
-
-/* Different Direction Animation */
-
-.card:nth-child(4n+1){
-  transform:translateX(-60px);
-}
-
-.card:nth-child(4n+2){
-  transform:translateX(60px);
-}
-
-.card:nth-child(4n+3){
-  transform:translateY(-60px);
-}
-
-.card:nth-child(4n+4){
-  transform:translateY(60px);
 }
 
 /* Image */
@@ -198,8 +183,8 @@ body{
 /* Floating Button */
 .chat-button{
   position:fixed;
-  right:62px;
-  bottom:93px;
+  right:20px;
+  bottom:20px;
   width:55px;
   height:55px;
   background:#00aa88;
@@ -219,27 +204,50 @@ body{
 /* Popup */
 .popup-box{
   position:fixed;
-  right:70px;
-  bottom:150px;
-  width:320px;
-  background:rgba(17,17,17,.85);
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  width:90%;
+  max-width:320px;
+  background:rgba(17,17,17,.92);
   backdrop-filter:blur(10px);
   color:#fff;
-  padding:15px;
-  border-radius:12px;
+  padding:18px;
+  border-radius:14px;
   border:2px solid #444;
   display:none;
-  z-index:9999;
+  z-index:99999;
+  box-shadow:0 0 25px rgba(0,0,0,.5);
+  box-sizing:border-box;
 }
 
 .popup-box h3{
-  margin-top:0;
+  margin-bottom:12px;
   font-size:20px;
+  text-align:center;
 }
 
 .popup-box p{
   font-size:15px;
   line-height:1.6;
+}
+
+/* Mobile Responsive */
+@media(max-width:480px){
+
+  .gallery{
+    gap:5px;
+    padding:5px;
+  }
+
+  .chat-button{
+    width:52px;
+    height:52px;
+    font-size:26px;
+    right:15px;
+    bottom:15px;
+  }
+
 }
 
 </style>
@@ -289,8 +297,7 @@ body{
 
   <p>
     <i>
-      আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ। 
-       অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: ০১৩১৫৬৩৭৮৯৩) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
+      আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ। অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: 01315637893) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
     </i>
   </p>
 
@@ -392,10 +399,19 @@ function togglePopup(event){
 
 }
 
-/* Click Anywhere Close Popup */
-document.addEventListener("click", function(){
+/* Click Outside Close Popup */
+document.addEventListener("click", function(e){
 
-  document.getElementById("popupBox").style.display = "none";
+  const popup = document.getElementById("popupBox");
+  const button = document.querySelector(".chat-button");
+
+  if(
+    popup.style.display === "block" &&
+    !popup.contains(e.target) &&
+    !button.contains(e.target)
+  ){
+    popup.style.display = "none";
+  }
 
 });
 
