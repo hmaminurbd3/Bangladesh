@@ -17,6 +17,21 @@ body{
   font-family:Arial,sans-serif;
 }
 
+/* Loading Screen */
+#loader{
+  position:fixed;
+  inset:0;
+  background:#000;
+  color:#d6d6d6;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:28px;
+  font-weight:bold;
+  letter-spacing:1px;
+  z-index:99999;
+}
+
 /* Header */
 .header{
   text-align:center;
@@ -41,7 +56,7 @@ body{
   width:100%;
   overflow:hidden;
   background:#000;
-  padding:2।px 0;
+  padding:2px 0;
 }
 
 .scroll-text p{
@@ -164,6 +179,13 @@ body{
 
 <body>
 
+<!-- Loading -->
+<div id="loader">
+  <i>
+    রোকোজারা...
+  </i>
+</div>
+
 <!-- Header -->
 <div class="header">
 
@@ -181,7 +203,7 @@ body{
 <div class="scroll-text">
 
   <p>
-একটি বিশেষ বিজ্ঞপ্তি: ৫-১- ২০২৬ থেকে শুরু হওয়া বই ও কুরআন প্রতিযোগিতা এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
+    একটি বিশেষ বিজ্ঞপ্তি: ৫-১-২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
   </p>
 
 </div>
@@ -200,7 +222,7 @@ body{
   <h3>নোটিশ</h3>
 
   <p>
-    আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ প্রিয় শিক্ষকবৃন্দ আল্লাহর অশেষ রহমত এবং আপনাদের দোআয় কারীয়ানা জগতে আমরা সর্বপ্রথম ওয়েবসাইট যাত্রা শুরু করেছি, আশাকরি এখান থেকে আমরা অনেক উপকৃত হব, যেহেতু অ্যাপস টা নতুন তাই যেকোনো সমস্যা দেখা দিতে পারে, যদি কোন সমস্যা দেখা দেয় এবং আপনার পার্সোনাল ডিটেলস ভুল দেখায় তাহলে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: 01315637893) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ। 
+    আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ।
   </p>
 
 </div>
@@ -225,7 +247,11 @@ fetch(API_URL)
 
       <div class="card">
 
-        <img src="${item.image}" class="card-img">
+        <img 
+          src="${item.image}" 
+          class="card-img"
+          onload="hideLoader()"
+        >
 
         <a href="page.html?id=${item.id}"></a>
 
@@ -243,7 +269,16 @@ fetch(API_URL)
 
   console.log(error);
 
+  hideLoader();
+
 });
+
+/* Hide Loader */
+function hideLoader(){
+
+  document.getElementById("loader").style.display = "none";
+
+}
 
 /* Popup Toggle */
 function togglePopup(event){
