@@ -1,8 +1,12 @@
 <!DOCTYPE html>
 <html lang="bn">
+
 <head>
+
 <meta charset="UTF-8">
+
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>Gallery</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Bengali:wght@400;700&display=swap" rel="stylesheet">
@@ -23,6 +27,7 @@ body{
   font-family:'Noto Sans Bengali', sans-serif;
 }
 
+
 /* =========================
    LOADER
 ========================= */
@@ -30,15 +35,21 @@ body{
 #loader{
   position:fixed;
   inset:0;
+
   background:#07111f;
+
   color:#fff;
+
   display:flex;
   align-items:center;
   justify-content:center;
+
   font-size:28px;
   font-weight:bold;
+
   z-index:999999;
 }
+
 
 /* =========================
    FIXED TOP AREA
@@ -46,13 +57,18 @@ body{
 
 .fixed-top{
   position:fixed;
+
   top:0;
   left:0;
+
   width:100%;
   height:100px;
+
   z-index:9999;
+
   background:#07111f;
 }
+
 
 /* =========================
    HEADER
@@ -60,7 +76,9 @@ body{
 
 .header{
   width:100%;
+
   padding:12px 8px;
+
   text-align:center;
 
   background:
@@ -76,14 +94,18 @@ body{
 
 .header h1{
   font-size:18px;
+
   margin-bottom:5px;
+
   font-weight:700;
 }
 
 .header p{
   font-size:12px;
+
   opacity:.95;
 }
+
 
 /* =========================
    PREMIUM SLIDER
@@ -91,6 +113,7 @@ body{
 
 .offer-slider{
   width:100%;
+
   overflow:hidden;
 
   background:
@@ -109,32 +132,35 @@ body{
   border-bottom:
   1px solid rgba(255,255,255,.08);
 
-  /* সামান্য ফাঁকা */
   margin-bottom:6px;
 }
 
 .offer-track{
   display:flex;
+
   width:max-content;
 
   animation:
   sliderMove 22s linear infinite;
+
+  will-change:transform;
 }
 
 .offer-item{
-
   min-width:max-content;
 
   padding:12px 22px;
 
   color:#fff;
+
   font-size:14px;
+
   font-weight:700;
 
   border-right:
   1px solid rgba(255,255,255,.12);
-
 }
+
 
 @keyframes sliderMove{
 
@@ -148,6 +174,7 @@ body{
 
 }
 
+
 /* =========================
    GALLERY
 ========================= */
@@ -156,22 +183,29 @@ body{
   width:100%;
 
   display:grid;
-  grid-template-columns:repeat(2,1fr);
+
+  grid-template-columns:
+  repeat(2,1fr);
 
   gap:6px;
 
-  /* আরো উপরে উঠানো হয়েছে */
   padding:112px 6px 6px;
 }
 
-/* Card */
+
+/* =========================
+   CARD
+========================= */
 
 .card{
   position:relative;
+
   width:100%;
+
   aspect-ratio:1 / 1.4;
 
   overflow:hidden;
+
   border-radius:8px;
 
   opacity:0;
@@ -188,7 +222,10 @@ body{
   padding:2px;
 }
 
-/* Animation */
+
+/* =========================
+   ANIMATION
+========================= */
 
 .card:nth-child(4n+1){
   transform:translateX(-60px);
@@ -208,44 +245,63 @@ body{
 
 .card.show{
   opacity:1 !important;
-  transform:translate(0,0) !important;
+
+  transform:
+  translate(0,0) !important;
 }
 
-/* Image */
+
+/* =========================
+   IMAGE
+========================= */
 
 .card-img{
   width:100%;
   height:100%;
+
   object-fit:cover;
+
   display:block;
 
   border-radius:6px;
 }
 
-/* Click */
+
+/* =========================
+   CLICK
+========================= */
 
 .card a{
   position:absolute;
+
   inset:0;
 }
 
-/* Title */
+
+/* =========================
+   TITLE
+========================= */
 
 .card span{
   position:absolute;
+
   left:2px;
   bottom:2px;
+
   width:calc(100% - 4px);
 
   padding:8px;
 
   color:#fff;
+
   font-size:12px;
+
   font-weight:bold;
 
   text-align:center;
 
-  border-radius:0 0 6px 6px;
+  border-radius:
+  0 0 6px 6px;
 
   background:
   linear-gradient(
@@ -255,8 +311,9 @@ body{
   );
 }
 
+
 /* =========================
-   FLOAT BUTTON
+   FLOATING MESSAGE BUTTON
 ========================= */
 
 .chat-button{
@@ -280,7 +337,9 @@ body{
   color:#fff;
 
   display:flex;
+
   align-items:center;
+
   justify-content:center;
 
   font-size:28px;
@@ -290,53 +349,328 @@ body{
   z-index:99999;
 
   box-shadow:
-  0 0 20px rgba(0,255,180,.35);
+  0 0 20px
+  rgba(0,255,180,.35);
+
+  user-select:none;
+
+  -webkit-tap-highlight-color:transparent;
 }
 
+
 /* =========================
-   POPUP
+   POPUP BACKDROP
 ========================= */
 
-.popup-box{
+.popup-overlay{
   position:fixed;
 
-  top:50%;
-  left:50%;
-
-  transform:translate(-50%,-50%);
-
-  width:90%;
-  max-width:320px;
+  inset:0;
 
   background:
-  rgba(15,15,15,.94);
+  rgba(0,0,0,.42);
 
-  backdrop-filter:blur(14px);
+  backdrop-filter:
+  blur(3px);
 
-  color:#fff;
-
-  padding:18px;
-
-  border-radius:16px;
-
-  border:
-  1px solid rgba(255,255,255,.08);
+  -webkit-backdrop-filter:
+  blur(3px);
 
   display:none;
 
-  z-index:999999;
+  align-items:center;
+
+  justify-content:center;
+
+  padding:20px;
+
+  z-index:999998;
 }
 
-.popup-box h3{
-  text-align:center;
-  margin-bottom:12px;
-  font-size:20px;
+
+/* =========================
+   WHATSAPP MESSAGE POPUP
+========================= */
+
+.popup-box{
+  position:relative;
+
+  width:100%;
+
+  max-width:390px;
+
+  max-height:82vh;
+
+  overflow-y:auto;
+
+  background:
+  linear-gradient(
+    145deg,
+    #10231f,
+    #071a17
+  );
+
+  color:#fff;
+
+  border-radius:20px;
+
+  border:
+  1px solid
+  rgba(255,255,255,.10);
+
+  box-shadow:
+  0 18px 60px
+  rgba(0,0,0,.55);
+
+  padding:0;
+
+  transform:
+  scale(.92)
+  translateY(15px);
+
+  opacity:0;
+
+  transition:
+  transform .25s ease,
+  opacity .25s ease;
 }
 
-.popup-box p{
+.popup-overlay.active .popup-box{
+
+  transform:
+  scale(1)
+  translateY(0);
+
+  opacity:1;
+}
+
+
+/* =========================
+   POPUP HEADER
+========================= */
+
+.popup-header{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:space-between;
+
+  padding:15px 16px;
+
+  background:
+  linear-gradient(
+    135deg,
+    #128c7e,
+    #075e54
+  );
+
+  border-radius:
+  20px 20px 0 0;
+}
+
+.popup-title-area{
+
+  display:flex;
+
+  align-items:center;
+
+  gap:10px;
+}
+
+.popup-whatsapp-icon{
+
+  width:40px;
+  height:40px;
+
+  border-radius:50%;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  background:
+  rgba(255,255,255,.16);
+
+  font-size:23px;
+}
+
+.popup-header h3{
+
+  font-size:17px;
+
+  font-weight:700;
+
+  margin:0;
+}
+
+.popup-header small{
+
+  display:block;
+
+  font-size:10px;
+
+  opacity:.82;
+
+  margin-top:2px;
+}
+
+
+/* =========================
+   CLOSE BUTTON
+========================= */
+
+.popup-close{
+
+  width:34px;
+  height:34px;
+
+  border:0;
+
+  border-radius:50%;
+
+  background:
+  rgba(0,0,0,.18);
+
+  color:#fff;
+
+  font-size:22px;
+
+  cursor:pointer;
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+}
+
+
+/* =========================
+   MESSAGE AREA
+========================= */
+
+.popup-message-area{
+
+  padding:18px 16px 14px;
+}
+
+
+/* =========================
+   MESSAGE BUBBLE
+========================= */
+
+.message-bubble{
+
+  position:relative;
+
+  background:#e7ffdb;
+
+  color:#172018;
+
+  border-radius:
+  4px 15px 15px 15px;
+
+  padding:15px;
+
   font-size:15px;
-  line-height:1.7;
+
+  line-height:1.8;
+
+  box-shadow:
+  0 2px 5px
+  rgba(0,0,0,.12);
 }
+
+.message-bubble:before{
+
+  content:"";
+
+  position:absolute;
+
+  left:-7px;
+
+  top:0;
+
+  width:0;
+  height:0;
+
+  border-top:
+  8px solid #e7ffdb;
+
+  border-left:
+  8px solid transparent;
+}
+
+.message-bubble i{
+
+  font-style:normal;
+}
+
+
+/* =========================
+   WHATSAPP GROUP BUTTON
+========================= */
+
+.whatsapp-group-button{
+
+  display:flex;
+
+  align-items:center;
+
+  justify-content:center;
+
+  gap:9px;
+
+  width:
+  calc(100% - 32px);
+
+  margin:
+  0 16px 18px;
+
+  padding:13px 15px;
+
+  border-radius:12px;
+
+  text-decoration:none;
+
+  background:
+  linear-gradient(
+    135deg,
+    #25d366,
+    #128c7e
+  );
+
+  color:#fff;
+
+  font-size:15px;
+
+  font-weight:700;
+
+  box-shadow:
+  0 5px 15px
+  rgba(37,211,102,.20);
+
+  transition:
+  transform .15s ease,
+  opacity .15s ease;
+}
+
+.whatsapp-group-button:active{
+
+  transform:scale(.97);
+
+}
+
+.whatsapp-group-button span{
+
+  font-size:20px;
+
+}
+
 
 /* =========================
    MOBILE
@@ -345,37 +679,101 @@ body{
 @media(max-width:480px){
 
   .gallery{
-    padding:112px 6px 6px;
+    padding:
+    112px 6px 6px;
   }
 
   .offer-item{
-    padding:11px 18px;
+    padding:
+    11px 18px;
+
     font-size:13px;
   }
 
   .chat-button{
     width:52px;
     height:52px;
+
     font-size:26px;
+  }
+
+  .popup-overlay{
+
+    padding:
+    18px;
+
+  }
+
+  .popup-box{
+
+    max-width:
+    380px;
+
+    max-height:
+    84vh;
+
+    border-radius:
+    18px;
+
+  }
+
+  .popup-header{
+
+    border-radius:
+    18px 18px 0 0;
+
+  }
+
+  .message-bubble{
+
+    font-size:
+    14px;
+
+    line-height:
+    1.75;
+
   }
 
 }
 
+
+/* =========================
+   PREVENT BODY SCROLL
+========================= */
+
+body.popup-open{
+
+  overflow:hidden;
+
+}
+
 </style>
+
 </head>
+
 
 <body>
 
-<!-- Loader -->
+
+<!-- =========================
+     LOADER
+========================= -->
+
 <div id="loader">
   Loading...
 </div>
 
-<!-- FIXED TOP -->
+
+
+<!-- =========================
+     FIXED TOP
+========================= -->
 
 <div class="fixed-top">
 
-  <!-- Header -->
+
+  <!-- HEADER -->
+
   <div class="header">
 
     <h1>
@@ -388,14 +786,32 @@ body{
 
   </div>
 
-  <!-- Slider -->
+
+  <!-- =========================
+       SLIDER
+  ========================= -->
+
   <div class="offer-slider">
 
-    <div class="offer-track">
+    <div
+      class="offer-track"
+      id="offerTrack"
+    >
 
-      <div class="offer-item">
+      <div
+        class="offer-item"
+        id="noticeText"
+      >
         একটি বিশেষ বিজ্ঞপ্তি: ৫-১-২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
-         </div>
+      </div>
+
+
+      <div
+        class="offer-item"
+        id="noticeTextClone"
+      >
+        একটি বিশেষ বিজ্ঞপ্তি: ৫-১-২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।
+      </div>
 
     </div>
 
@@ -403,161 +819,1055 @@ body{
 
 </div>
 
-<!-- Gallery -->
-<div class="gallery" id="gallery"></div>
 
-<!-- Floating Button -->
-<div class="chat-button" onclick="togglePopup(event)">
+
+<!-- =========================
+     GALLERY
+========================= -->
+
+<div
+  class="gallery"
+  id="gallery"
+></div>
+
+
+
+<!-- =========================
+     FLOATING MESSAGE BUTTON
+========================= -->
+
+<div
+  class="chat-button"
+  id="chatButton"
+  onclick="togglePopup(event)"
+  aria-label="Message"
+>
+
   💬
-</div>
-
-<!-- Popup -->
-<div class="popup-box" id="popupBox">
-
-  <h3><i>
-    নোটিশ
-  </i>
-    
-  </h3>
-
-  <p><i>
-    আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ। 
-অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: 01315637893) এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330), বি: দ্র: এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
-    </i>
-    </p>
 
 </div>
 
-<script>
 
-/* API */
-const API_URL =
-"https://sheetdb.io/api/v1/6g14o3v06mhoa";
 
-/* Load Gallery */
-fetch(API_URL)
+<!-- =========================
+     POPUP OVERLAY
+========================= -->
 
-.then(res => res.json())
+<div
+  class="popup-overlay"
+  id="popupOverlay"
+  onclick="overlayClick(event)"
+>
 
-.then(data => {
 
-  const gallery =
-  document.getElementById("gallery");
+  <!-- =========================
+       POPUP
+  ========================= -->
 
-  data.forEach(item => {
+  <div
+    class="popup-box"
+    id="popupBox"
+  >
 
-    gallery.innerHTML += `
 
-      <div class="card">
+    <!-- POPUP HEADER -->
 
-        <img
-          src="${item.image}"
-          class="card-img"
-          loading="lazy"
-          onload="hideLoader()"
-        >
+    <div class="popup-header">
 
-        <a href="page.html?id=${item.id}">
-        </a>
 
-        <span>
-          ${item.title}
-        </span>
+      <div class="popup-title-area">
+
+        <div class="popup-whatsapp-icon">
+          💬
+        </div>
+
+
+        <div>
+
+          <h3>
+            Message
+          </h3>
+
+          <small>
+            WhatsApp Group
+          </small>
+
+        </div>
 
       </div>
 
-    `;
 
-  });
+      <button
+        class="popup-close"
+        onclick="closePopup(event)"
+        aria-label="Close"
+      >
+        ×
+      </button>
 
-  /* Scroll Animation */
-  const cards =
-  document.querySelectorAll(".card");
 
-  const observer =
-  new IntersectionObserver(entries => {
+    </div>
 
-    entries.forEach(entry => {
 
-      if(entry.isIntersecting){
 
-        entry.target
-        .classList
-        .add("show");
+    <!-- MESSAGE -->
+
+    <div class="popup-message-area">
+
+      <div class="message-bubble">
+
+        <i>
+
+          আসসালামু আলাইকুম ওয়া রাহমাতুল্লাহ।
+
+          <br><br>
+
+          অ্যাপসের সমস্যা এবং আপনার পার্সোনাল ডিটেলস ভুল দেখালে যোগাযোগ করুন
+          (ডেভলপার মোঃ আমিনুর রহমান, নাম্বার: 01315637893)
+
+          <br><br>
+
+          এবং আপনার বই বা কোরআনের হিসাব যদি ভুল দেখায় তাহলে যোগাযোগ করুন
+          (পরিচালক মোঃ আব্দুর রহমান, নাম্বার: 01764625330)।
+
+          <br><br>
+
+          বি: দ্র:
+          এই অ্যাপস পরিচালক মোঃ আব্দুর রহমান হুজুরের সহকারী শিক্ষক ব্যতীত অন্য কারো কাছে শেয়ার করা সম্পূর্ণ নিষেধ।
+
+        </i>
+
+      </div>
+
+    </div>
+
+
+
+    <!-- =========================
+         WHATSAPP GROUP
+    ========================= -->
+
+    <a
+      class="whatsapp-group-button"
+      href="https://chat.whatsapp.com/Kgx5EMxwOzKFmDBkC4woxC"
+      target="_blank"
+      rel="noopener noreferrer"
+      onclick="closePopupBeforeWhatsApp()"
+    >
+
+      <span>
+        💬
+      </span>
+
+      WhatsApp Group-এ যোগ দিন
+
+    </a>
+
+
+  </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =====================================================
+   API
+===================================================== */
+
+const API_URL =
+"https://sheetdb.io/api/v1/6g14o3v06mhoa";
+
+
+
+/* =====================================================
+   WHATSAPP GROUP
+===================================================== */
+
+const WHATSAPP_GROUP_URL =
+"https://chat.whatsapp.com/Kgx5EMxwOzKFmDBkC4woxC";
+
+
+
+/* =====================================================
+   DEFAULT NOTICE
+===================================================== */
+
+const DEFAULT_NOTICE =
+"একটি বিশেষ বিজ্ঞপ্তি: ৫-১-২০২৬ থেকে শুরু হওয়া বই এবং কুরআন প্রতিযোগিতা, এবং এক নজরে সমস্ত আপডেট জানতে চোখ রাখুন এই অ্যাপসে।";
+
+
+
+/* =====================================================
+   NOTICE UPDATE
+===================================================== */
+
+function updateNotice(data){
+
+
+  let newNotice = "";
+
+
+  /*
+    SheetDB-এর response-এর মধ্যে
+    Notice column খোঁজা হবে।
+
+    Google Sheet:
+    L1 = Notice
+    L2 = তোমার লেখা
+  */
+
+
+  if(Array.isArray(data)){
+
+
+    for(
+      let i = 0;
+      i < data.length;
+      i++
+    ){
+
+      const row =
+      data[i];
+
+
+      if(!row){
+        continue;
+      }
+
+
+      if(
+        row.Notice !== undefined &&
+        row.Notice !== null
+      ){
+
+        const value =
+        String(
+          row.Notice
+        ).trim();
+
+
+        if(
+          value !== ""
+        ){
+
+          newNotice =
+          value;
+
+          break;
+
+        }
 
       }
 
-    });
-
-  });
-
-  cards.forEach(card => {
-
-    observer.observe(card);
-
-  });
-
-})
-
-.catch(error => {
-
-  console.log(error);
-
-  hideLoader();
-
-});
-
-/* Hide Loader */
-function hideLoader(){
-
-  document
-  .getElementById("loader")
-  .style.display = "none";
-
-}
-
-/* Popup Toggle */
-function togglePopup(event){
-
-  event.stopPropagation();
-
-  const popup =
-  document.getElementById("popupBox");
-
-  if(popup.style.display === "block"){
-
-    popup.style.display = "none";
-
-  }else{
-
-    popup.style.display = "block";
+    }
 
   }
 
-}
 
-/* Close Popup */
-document.addEventListener("click", function(e){
 
-  const popup =
-  document.getElementById("popupBox");
-
-  const button =
-  document.querySelector(".chat-button");
+  /*
+    Notice পাওয়া না গেলে
+    আগের লেখা থাকবে।
+  */
 
   if(
-    popup.style.display === "block" &&
-    !popup.contains(e.target) &&
-    !button.contains(e.target)
+    newNotice === ""
   ){
 
-    popup.style.display = "none";
+    newNotice =
+    DEFAULT_NOTICE;
 
   }
 
-});
+
+
+  const noticeElement =
+  document.getElementById(
+    "noticeText"
+  );
+
+
+  const noticeClone =
+  document.getElementById(
+    "noticeTextClone"
+  );
+
+
+
+  if(noticeElement){
+
+    noticeElement.innerText =
+    newNotice;
+
+  }
+
+
+  if(noticeClone){
+
+    noticeClone.innerText =
+    newNotice;
+
+  }
+
+}
+
+
+
+/* =====================================================
+   LOAD GALLERY
+===================================================== */
+
+let galleryLoaded = false;
+
+
+function loadGallery(){
+
+
+  const requestURL =
+  API_URL +
+  "?t=" +
+  Date.now();
+
+
+
+  fetch(requestURL)
+
+
+  .then(res => {
+
+
+    if(!res.ok){
+
+      throw new Error(
+        "API Error: " +
+        res.status
+      );
+
+    }
+
+
+    return res.json();
+
+  })
+
+
+  .then(data => {
+
+
+    /*
+      প্রথমে Notice update হবে।
+    */
+
+    updateNotice(data);
+
+
+
+    /*
+      Gallery যদি আগে থেকেই
+      তৈরি হয়ে থাকে তাহলে আবার
+      তৈরি করা হবে না।
+
+      এতে Back করলে duplicate
+      card হবে না।
+    */
+
+    if(
+      galleryLoaded
+    ){
+
+      hideLoader();
+
+      return;
+
+    }
+
+
+
+    const gallery =
+    document.getElementById(
+      "gallery"
+    );
+
+
+
+    if(!gallery){
+
+      hideLoader();
+
+      return;
+
+    }
+
+
+
+    /*
+      Gallery তৈরি
+    */
+
+    data.forEach(item => {
+
+
+      /*
+        যেসব row-তে image/title
+        নেই সেগুলো বাদ যাবে।
+      */
+
+      if(
+        !item.image &&
+        !item.title
+      ){
+
+        return;
+
+      }
+
+
+
+      gallery.innerHTML += `
+
+        <div class="card">
+
+          <img
+            src="${item.image || ''}"
+            class="card-img"
+            loading="lazy"
+            onload="hideLoader()"
+          >
+
+          <a
+            href="page.html?id=${encodeURIComponent(item.id || '')}"
+            onclick="saveScrollPosition()"
+          >
+          </a>
+
+          <span>
+            ${item.title || ''}
+          </span>
+
+        </div>
+
+      `;
+
+    });
+
+
+
+    galleryLoaded =
+    true;
+
+
+
+    /*
+      Scroll animation
+    */
+
+    const cards =
+    document.querySelectorAll(
+      ".card"
+    );
+
+
+
+    const observer =
+    new IntersectionObserver(
+      entries => {
+
+        entries.forEach(
+          entry => {
+
+            if(
+              entry.isIntersecting
+            ){
+
+              entry.target
+              .classList
+              .add("show");
+
+            }
+
+          }
+        );
+
+      },
+
+      {
+        threshold:.08
+      }
+
+    );
+
+
+
+    cards.forEach(
+      card => {
+
+        observer.observe(card);
+
+      }
+    );
+
+
+
+    /*
+      সব card তৈরি হওয়ার পর
+      loader বন্ধ।
+    */
+
+    setTimeout(
+      hideLoader,
+      500
+    );
+
+
+  })
+
+
+  .catch(error => {
+
+
+    console.log(
+      "API Error:",
+      error
+    );
+
+
+    /*
+      Notice বা Gallery API error হলেও
+      ওয়েবসাইট আটকে থাকবে না।
+    */
+
+    hideLoader();
+
+  });
+
+}
+
+
+
+/* =====================================================
+   FIRST LOAD
+===================================================== */
+
+loadGallery();
+
+
+
+/* =====================================================
+   AUTO NOTICE UPDATE
+=====================================================
+
+   প্রতি ১০ সেকেন্ডে SheetDB চেক হবে।
+
+   Gallery দ্বিতীয়বার render হবে না।
+
+===================================================== */
+
+setInterval(
+  loadGallery,
+  10000
+);
+
+
+
+/* =====================================================
+   HIDE LOADER
+===================================================== */
+
+function hideLoader(){
+
+
+  const loader =
+  document.getElementById(
+    "loader"
+  );
+
+
+  if(loader){
+
+    loader.style.display =
+    "none";
+
+  }
+
+}
+
+
+
+/* =====================================================
+   SAVE SCROLL POSITION
+=====================================================
+
+   Candidate-এর card থেকে
+   page.html-এ যাওয়ার আগে
+   বর্তমান scroll position
+   save হবে।
+
+===================================================== */
+
+function saveScrollPosition(){
+
+
+  try{
+
+    sessionStorage.setItem(
+      "indexScrollY",
+      String(
+        window.scrollY ||
+        window.pageYOffset ||
+        0
+      )
+    );
+
+
+    sessionStorage.setItem(
+      "indexScrollTime",
+      String(
+        Date.now()
+      )
+    );
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Scroll save error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   RESTORE SCROLL POSITION
+=====================================================
+
+   page.html থেকে Back করলে
+   আগের জায়গায় ফিরবে।
+
+===================================================== */
+
+function restoreScrollPosition(){
+
+
+  try{
+
+
+    const savedPosition =
+    sessionStorage.getItem(
+      "indexScrollY"
+    );
+
+
+    const savedTime =
+    sessionStorage.getItem(
+      "indexScrollTime"
+    );
+
+
+    if(
+      !savedPosition
+    ){
+
+      return;
+
+    }
+
+
+    /*
+      30 মিনিটের বেশি পুরোনো
+      position ব্যবহার করবে না।
+    */
+
+    if(
+      savedTime &&
+      (
+        Date.now() -
+        Number(savedTime)
+      ) >
+      30 * 60 * 1000
+    ){
+
+      sessionStorage.removeItem(
+        "indexScrollY"
+      );
+
+      sessionStorage.removeItem(
+        "indexScrollTime"
+      );
+
+      return;
+
+    }
+
+
+    const position =
+    Number(
+      savedPosition
+    );
+
+
+    /*
+      Gallery তৈরি হওয়ার পর
+      scroll restore করার জন্য
+      একটু অপেক্ষা।
+    */
+
+    const restore =
+    () => {
+
+      window.scrollTo(
+        0,
+        position
+      );
+
+    };
+
+
+    /*
+      দুইবার চেষ্টা করা হচ্ছে।
+    */
+
+    requestAnimationFrame(
+      () => {
+
+        restore();
+
+        setTimeout(
+          restore,
+          100
+        );
+
+        setTimeout(
+          restore,
+          300
+        );
+
+      }
+    );
+
+
+  }
+
+  catch(error){
+
+    console.log(
+      "Scroll restore error:",
+      error
+    );
+
+  }
+
+}
+
+
+
+/* =====================================================
+   PAGE SHOW
+=====================================================
+
+   Browser Back/Forward করলে
+   এই event কাজ করবে।
+
+===================================================== */
+
+window.addEventListener(
+  "pageshow",
+  function(event){
+
+    /*
+      শুধু index page-এর
+      saved position থাকলে restore।
+    */
+
+    restoreScrollPosition();
+
+  }
+);
+
+
+
+/* =====================================================
+   BEFORE UNLOAD
+===================================================== */
+
+window.addEventListener(
+  "beforeunload",
+  function(){
+
+    /*
+      যদি page unload হওয়ার সময়
+      user index page-এ থাকে,
+      বর্তমান position save করে।
+    */
+
+    saveScrollPosition();
+
+  }
+);
+
+
+
+/* =====================================================
+   POPUP OPEN
+===================================================== */
+
+function togglePopup(event){
+
+
+  if(event){
+
+    event.stopPropagation();
+
+  }
+
+
+  const overlay =
+  document.getElementById(
+    "popupOverlay"
+  );
+
+
+  if(!overlay){
+
+    return;
+
+  }
+
+
+  /*
+    Popup যদি খোলা থাকে
+    তাহলে বন্ধ হবে।
+  */
+
+  if(
+    overlay.classList.contains(
+      "active"
+    )
+  ){
+
+    closePopup();
+
+    return;
+
+  }
+
+
+  /*
+    Popup open
+  */
+
+  overlay.style.display =
+  "flex";
+
+
+  document.body.classList.add(
+    "popup-open"
+  );
+
+
+  /*
+    animation চালানোর জন্য
+    পরের frame-এ active।
+  */
+
+  requestAnimationFrame(
+    () => {
+
+      overlay.classList.add(
+        "active"
+      );
+
+    }
+  );
+
+}
+
+
+
+/* =====================================================
+   CLOSE POPUP
+===================================================== */
+
+function closePopup(event){
+
+
+  if(event){
+
+    event.preventDefault();
+
+    event.stopPropagation();
+
+  }
+
+
+  const overlay =
+  document.getElementById(
+    "popupOverlay"
+  );
+
+
+  if(!overlay){
+
+    return;
+
+  }
+
+
+  overlay.classList.remove(
+    "active"
+  );
+
+
+  document.body.classList.remove(
+    "popup-open"
+  );
+
+
+  setTimeout(
+    () => {
+
+      if(
+        !overlay.classList.contains(
+          "active"
+        )
+      ){
+
+        overlay.style.display =
+        "none";
+
+      }
+
+    },
+    250
+  );
+
+}
+
+
+
+/* =====================================================
+   POPUP OVERLAY CLICK
+===================================================== */
+
+function overlayClick(event){
+
+
+  const overlay =
+  document.getElementById(
+    "popupOverlay"
+  );
+
+
+  /*
+    Popup-এর বাইরের জায়গায়
+    চাপলে বন্ধ হবে।
+
+    Popup-এর ভেতরে চাপলে
+    বন্ধ হবে না।
+  */
+
+  if(
+    event.target === overlay
+  ){
+
+    closePopup();
+
+  }
+
+}
+
+
+
+/* =====================================================
+   CLOSE BEFORE WHATSAPP
+===================================================== */
+
+function closePopupBeforeWhatsApp(){
+
+
+  /*
+    WhatsApp link already
+    HTML href-এর মধ্যে আছে।
+
+    আগে popup বন্ধ হবে।
+  */
+
+  closePopup();
+
+}
+
+
+
+/* =====================================================
+   ESC KEY
+===================================================== */
+
+document.addEventListener(
+  "keydown",
+  function(event){
+
+    if(
+      event.key === "Escape"
+    ){
+
+      const overlay =
+      document.getElementById(
+        "popupOverlay"
+      );
+
+
+      if(
+        overlay &&
+        overlay.classList.contains(
+          "active"
+        )
+      ){
+
+        closePopup();
+
+      }
+
+    }
+
+  }
+);
+
+
+
+/* =====================================================
+   POPUP BUTTON SAFETY
+===================================================== */
+
+const popupBox =
+document.getElementById(
+  "popupBox"
+);
+
+
+if(popupBox){
+
+  popupBox.addEventListener(
+    "click",
+    function(event){
+
+      event.stopPropagation();
+
+    }
+  );
+
+}
+
 
 </script>
 
+
 </body>
+
 </html>
