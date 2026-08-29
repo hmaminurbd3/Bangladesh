@@ -747,6 +747,232 @@ body.popup-open{
 
 }
 
+
+/* =========================
+   PERSONAL DETAILS POPUP
+   সুন্দর সফট থিম + স্মুথ ওপেন/CLOSE
+   ========================= */
+
+.personal-overlay{
+  position:fixed;
+  inset:0;
+  background:rgba(3,10,18,.58);
+  backdrop-filter:blur(3px);
+  -webkit-backdrop-filter:blur(3px);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:16px;
+  z-index:9999;
+  box-sizing:border-box;
+
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+
+  transition:
+    opacity .38s ease,
+    visibility 0s linear .38s;
+}
+
+.personal-overlay.show{
+  opacity:1;
+  visibility:visible;
+  pointer-events:auto;
+
+  transition:
+    opacity .38s ease,
+    visibility 0s linear 0s;
+}
+
+.personal-popup{
+  position:relative;
+  width:min(92vw, 430px);
+  max-height:82vh;
+  overflow-y:auto;
+  border-radius:20px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(38,18,24,.99),
+      rgba(15,18,25,.99)
+    );
+
+  border:1px solid rgba(220,72,88,.20);
+
+  box-shadow:
+    0 24px 70px rgba(0,0,0,.48),
+    0 0 0 1px rgba(255,255,255,.035) inset;
+
+  box-sizing:border-box;
+
+  opacity:0;
+  transform:translateY(22px) scale(.92);
+  filter:blur(2px);
+
+  transition:
+    opacity .42s cubic-bezier(.22,1,.36,1),
+    transform .48s cubic-bezier(.22,1,.36,1),
+    filter .42s ease;
+}
+
+.personal-overlay.show .personal-popup{
+  opacity:1;
+  transform:translateY(0) scale(1);
+  filter:blur(0);
+}
+
+.personal-content{
+  position:relative;
+  padding:24px 18px 18px;
+  text-align:center;
+}
+
+.personal-content::before{
+  content:"";
+  position:absolute;
+  top:0;
+  left:12%;
+  right:12%;
+  height:2px;
+  border-radius:50%;
+  background:linear-gradient(
+    90deg,
+    transparent,
+    rgba(220,72,88,.68),
+    transparent
+  );
+}
+
+.personal-close{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:34px;
+  height:34px;
+  border:1px solid rgba(255,255,255,.12);
+  border-radius:50%;
+  background:rgba(255,255,255,.08);
+  color:#fff;
+  font-size:25px;
+  line-height:31px;
+  cursor:pointer;
+  z-index:2;
+
+  transition:
+    transform .22s ease,
+    background .22s ease;
+}
+
+.personal-close:hover{
+  transform:rotate(90deg) scale(1.05);
+  background:rgba(255,255,255,.15);
+}
+
+.personal-image{
+  display:block;
+  width:105px;
+  height:105px;
+  margin:2px auto 13px;
+  object-fit:cover;
+  object-position:center 20%;
+  border-radius:50%;
+  background:#240b10;
+
+  border:3px solid rgba(220,72,88,.62);
+
+  box-shadow:
+    0 0 0 6px rgba(220,72,88,.09),
+    0 10px 28px rgba(0,0,0,.30);
+}
+
+#personalName{
+  margin:0 34px 16px;
+  color:#f4fbff;
+  font-size:22px;
+  line-height:1.35;
+  font-weight:700;
+}
+
+.personal-info{
+  text-align:left;
+  margin-top:8px;
+  padding:12px 13px;
+  border-radius:14px;
+
+  background:rgba(255,255,255,.055);
+  border:1px solid rgba(255,255,255,.07);
+}
+
+.personal-info p{
+  margin:8px 0;
+  color:#dceaf1;
+  line-height:1.55;
+  word-break:break-word;
+}
+
+.personal-info strong{
+  margin-right:5px;
+  color:#f0808c;
+}
+
+.personal-stats{
+  display:flex;
+  gap:8px;
+  margin-top:14px;
+}
+
+.personal-stat{
+  flex:1;
+  padding:11px 7px;
+  border-radius:13px;
+
+  background:
+    linear-gradient(
+      145deg,
+      rgba(190,48,65,.16),
+      rgba(255,255,255,.045)
+    );
+
+  border:1px solid rgba(220,72,88,.16);
+
+  box-shadow:
+    0 7px 20px rgba(0,0,0,.12);
+}
+
+.personal-stat .stat-label{
+  display:block;
+  color:#d8b6bb;
+  font-size:14px;
+  margin-bottom:4px;
+}
+
+.personal-stat .stat-value{
+  display:block;
+  color:#f4fcff;
+  font-size:20px;
+  font-weight:700;
+}
+
+@media(max-width:420px){
+  .personal-popup{
+    width:92vw;
+  }
+
+  .personal-content{
+    padding:21px 14px 15px;
+  }
+}
+
+@media(prefers-reduced-motion:reduce){
+  .personal-overlay,
+  .personal-popup,
+  .personal-close{
+    transition:none !important;
+  }
+}
+
 </style>
 
 </head>
@@ -970,7 +1196,311 @@ body.popup-open{
 
 
 
+<!-- =========================
+     PERSONAL DETAILS POPUP
+     ========================= -->
+
+<div
+  class="personal-overlay"
+  id="personalOverlay"
+  onclick="personalOverlayClick(event)"
+>
+
+  <div
+    class="personal-popup"
+    id="personalPopup"
+  >
+
+    <button
+      class="personal-close"
+      type="button"
+      onclick="closePersonalDetails()"
+      aria-label="Close"
+    >
+      ×
+    </button>
+
+    <div class="personal-content">
+
+      <img
+        id="personalImage"
+        class="personal-image"
+        src=""
+        alt=""
+      >
+
+      <h2 id="personalName">Loading...</h2>
+
+      <div class="personal-info">
+
+        <p>
+          <strong>পদবি:</strong>
+          <span id="personalRank"></span>
+        </p>
+
+        <p>
+          <strong>ঠিকানা:</strong>
+          <span id="personalAddress"></span>
+        </p>
+
+        <p>
+          <strong>কর্মরত:</strong>
+          <span id="personalWorking"></span>
+        </p>
+
+        <p>
+          <strong>মোবাইল নাম্বার:</strong>
+          <span id="personalPhone"></span>
+        </p>
+
+      </div>
+
+      <div class="personal-stats">
+
+        <div class="personal-stat">
+          <span class="stat-label">বই</span>
+          <span id="personalBook" class="stat-value">0</span>
+        </div>
+
+        <div class="personal-stat">
+          <span class="stat-label">কুরআন</span>
+          <span id="personalQuran" class="stat-value">0</span>
+        </div>
+
+        <div class="personal-stat">
+          <span class="stat-label">পয়েন্ট</span>
+          <span id="personalPoints" class="stat-value">0</span>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+
 <script>
+
+
+/* =====================================================
+   PERSONAL DETAILS POPUP
+===================================================== */
+
+let personalPreviousOverflow = "";
+
+function openPersonalDetails(event, link){
+
+  if(event){
+    event.preventDefault();
+    event.stopPropagation();
+  }
+
+  const id =
+    link &&
+    link.dataset
+      ? link.dataset.id
+      : "";
+
+  let item = null;
+
+  if(
+    Array.isArray(window.currentSheetData)
+  ){
+
+    item =
+      window.currentSheetData.find(
+        row =>
+          String(row.id ?? "") ===
+          String(id)
+      );
+
+  }
+
+  if(!item){
+    return false;
+  }
+
+  const book =
+    toNumberForPersonal(
+      item.book
+    );
+
+  const quran =
+    toNumberForPersonal(
+      item.quran
+    );
+
+  const points =
+    (book * 1) +
+    (quran * 3);
+
+
+  document.getElementById(
+    "personalImage"
+  ).src =
+    item.image || "";
+
+
+  document.getElementById(
+    "personalName"
+  ).innerText =
+    item.name ||
+    item.title ||
+    "";
+
+
+  document.getElementById(
+    "personalRank"
+  ).innerText =
+    item.Rank || "";
+
+
+  document.getElementById(
+    "personalAddress"
+  ).innerText =
+    item.address || "";
+
+
+  document.getElementById(
+    "personalWorking"
+  ).innerText =
+    item.Working || "";
+
+
+  document.getElementById(
+    "personalPhone"
+  ).innerText =
+    item.phone || "";
+
+
+  document.getElementById(
+    "personalBook"
+  ).innerText =
+    book;
+
+
+  document.getElementById(
+    "personalQuran"
+  ).innerText =
+    quran;
+
+
+  document.getElementById(
+    "personalPoints"
+  ).innerText =
+    points;
+
+
+  const overlay =
+    document.getElementById(
+      "personalOverlay"
+    );
+
+  if(overlay){
+
+    overlay.classList.add("show");
+
+    personalPreviousOverflow =
+      document.body.style.overflow;
+
+    document.body.style.overflow =
+      "hidden";
+
+  }
+
+  return false;
+}
+
+
+function toNumberForPersonal(value){
+
+  if(
+    value === undefined ||
+    value === null ||
+    String(value).trim() === ""
+  ){
+    return 0;
+  }
+
+  const text =
+    String(value)
+      .trim()
+      .replace(/[০-৯]/g, d =>
+        "০১২৩৪৫৬৭৮৯".indexOf(d)
+      )
+      .replace(/[^\d.-]/g, "");
+
+  const n =
+    Number(text);
+
+  return Number.isFinite(n)
+    ? n
+    : 0;
+}
+
+
+function closePersonalDetails(){
+
+  const overlay =
+    document.getElementById(
+      "personalOverlay"
+    );
+
+  if(overlay){
+    overlay.classList.remove("show");
+  }
+
+  document.body.style.overflow =
+    personalPreviousOverflow;
+
+}
+
+
+function personalOverlayClick(event){
+
+  if(
+    event.target ===
+    document.getElementById(
+      "personalOverlay"
+    )
+  ){
+
+    closePersonalDetails();
+
+  }
+
+}
+
+
+document.addEventListener(
+  "keydown",
+  event => {
+
+    if(
+      event.key === "Escape"
+    ){
+
+      const overlay =
+        document.getElementById(
+          "personalOverlay"
+        );
+
+      if(
+        overlay &&
+        overlay.classList.contains("show")
+      ){
+
+        closePersonalDetails();
+
+      }
+
+    }
+
+  }
+);
+
 
 
 /* =====================================================
@@ -1125,6 +1655,9 @@ let galleryLoaded = false;
 
 function loadGallery(){
 
+  window.currentSheetData = [];
+
+
 
   const requestURL =
   API_URL +
@@ -1160,6 +1693,8 @@ function loadGallery(){
     /*
       প্রথমে Notice update হবে।
     */
+
+    window.currentSheetData = Array.isArray(data) ? data : [];
 
     updateNotice(data);
 
@@ -1204,10 +1739,112 @@ function loadGallery(){
 
 
     /*
-      Gallery তৈরি
+      ============================================
+      DYNAMIC RANKING
+      ============================================
+
+      বই = ১ পয়েন্ট
+      কুরআন = ৩ পয়েন্ট
+
+      Google Sheet-এর book এবং quran সংখ্যার
+      ভিত্তিতে মোট পয়েন্ট হিসাব হবে।
+      যার মোট পয়েন্ট বেশি, সে সবার উপরে থাকবে।
     */
 
-    data.forEach(item => {
+    function toNumber(value){
+
+      if(
+        value === undefined ||
+        value === null ||
+        String(value).trim() === ""
+      ){
+        return 0;
+      }
+
+      let text =
+        String(value)
+        .trim()
+        .replace(/[০-৯]/g, d =>
+          "০১২৩৪৫৬৭৮৯".indexOf(d)
+        )
+        .replace(/[^\d.-]/g, "");
+
+      const number =
+        Number(text);
+
+      return Number.isFinite(number)
+        ? number
+        : 0;
+    }
+
+
+    function getTotalPoints(item){
+
+      const book =
+        toNumber(item.book);
+
+      const quran =
+        toNumber(item.quran);
+
+      return (
+        book * 1
+      ) + (
+        quran * 3
+      );
+
+    }
+
+
+    /*
+      প্রতিটি row-কে মোট পয়েন্ট অনুযায়ী
+      বেশি থেকে কম সাজানো হচ্ছে।
+      একই পয়েন্ট হলে Sheet-এর আগের অবস্থান থাকবে।
+    */
+
+    const sortedData =
+      data
+      .map((item, index) => ({
+
+        item:item,
+
+        totalPoints:
+          getTotalPoints(item),
+
+        originalIndex:index
+
+      }))
+      .sort((a,b) => {
+
+        if(
+          b.totalPoints !==
+          a.totalPoints
+        ){
+
+          return (
+            b.totalPoints -
+            a.totalPoints
+          );
+
+        }
+
+        return (
+          a.originalIndex -
+          b.originalIndex
+        );
+
+      });
+
+
+    /*
+      ============================================
+      Gallery তৈরি
+      ============================================
+    */
+
+    sortedData.forEach(entry => {
+
+      const item =
+        entry.item;
 
 
       /*
@@ -1225,7 +1862,6 @@ function loadGallery(){
       }
 
 
-
       gallery.innerHTML += `
 
         <div class="card">
@@ -1238,10 +1874,10 @@ function loadGallery(){
           >
 
           <a
-            href="page.html?id=${encodeURIComponent(item.id || '')}"
-            onclick="saveScrollPosition()"
-          >
-          </a>
+            href="#"
+            onclick="openPersonalDetails(event, this)"
+            data-id="${item.id || ''}"
+          ></a>
 
           <span>
             ${item.title || ''}
@@ -1252,7 +1888,6 @@ function loadGallery(){
       `;
 
     });
-
 
 
     galleryLoaded =
@@ -1870,4 +2505,4 @@ if(popupBox){
 
 </body>
 
-</html>
+  </html>
