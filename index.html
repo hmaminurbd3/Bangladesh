@@ -793,11 +793,11 @@ body.popup-open{
   border-radius:20px;
 
   background:
-    linear-gradient(
-      145deg,
-      rgba(38,18,24,.99),
-      rgba(15,18,25,.99)
-    );
+  linear-gradient(
+    145deg,
+  #00C9A5
+    #0879D4,
+  );
 
   border:1px solid rgba(220,72,88,.20);
 
@@ -914,7 +914,7 @@ body.popup-open{
 
 .personal-info strong{
   margin-right:5px;
-  color:#f0808c;
+  color:#fff;
 }
 
 .personal-stats{
@@ -1508,7 +1508,7 @@ document.addEventListener(
 ===================================================== */
 
 const API_URL =
-"https://sheetdb.io/api/v1/6g14o3v06mhoa";
+"https://sheetdb.io/api/v1/e7d2pfzh4qap2";
 
 
 
@@ -1987,23 +1987,6 @@ function loadGallery(){
 ===================================================== */
 
 loadGallery();
-
-
-
-/* =====================================================
-   AUTO NOTICE UPDATE
-=====================================================
-
-   প্রতি ১০ সেকেন্ডে SheetDB চেক হবে।
-
-   Gallery দ্বিতীয়বার render হবে না।
-
-===================================================== */
-
-setInterval(
-  loadGallery,
-  10000
-);
 
 
 
@@ -2505,4 +2488,4 @@ if(popupBox){
 
 </body>
 
-  </html>
+</html>
